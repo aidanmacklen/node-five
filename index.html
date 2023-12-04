@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Fruits Index</h1>
+        <hr>
+        <a href="#" id="addl">Add +</a>
+    </header>
+
+    <div class="columns two-columns">
+        <div id="fruit-list" class="columns"></div>
+        <div id="fruit-information-column">
+            <h2>Information</h2>
+            <hr>
+
+            <div id="fruit-information"></div>
+        </div>
+    </div>
+    <div id="ae-fruit-container" class="box-text hide">
+        <span class="close">&times;</span>
+
+        <h3 id="ae-title">Fruit</h3>
+        <form id="ae-fruit-form" method="post">
+            <input type="hidden" name="_id" value="-1" />
+            <p>
+                <label for="name ">Fruit Name:</label>
+                <input type="text" id="name" name="name" required />
+            </p>
+            <p>
+                <label for="color">Color:</label>
+                <input type="text" id="color" name="color" required />
+            </p>
+            <p>
+                <label for="taste">Taste:</label>
+                <input type="text" id="taste" name="taste" required />
+            </p>
+            <p>
+                <label for="size">Size:</label>
+                <input type="text" id="size" name="size" required />
+            </p>
+            <p>
+                <label for="origin">Origin:</label>
+                <input type="text" id="origin" name="origin" required />
+            </p>
+
+            <p>
+                <label for="img">Upload Image:</label>
+                <input type="file" id="img" name="img" />
+            </p>
+
+            <p id="facts-p ">
+                <label class="inline">Facts:</label>
+                <a href="#" id="addf">Add Fact</a>
+                <section id="fact-boxes"></section>
+            </p>
+            <p>
+                <button type="submit">Submit</button>
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>
