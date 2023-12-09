@@ -8,117 +8,104 @@ const cors = require("cors");
 app.use(cors());
 const mongoose = require("mongoose");
 
-const upload = multer({ dest: __dirname + "/public/images" }); 
+const upload = multer({ dest: __dirname + "//public/images" }); 
 
 mongoose
-    .connect("mongodb+srv://aidancmacklen:Coolshoes107-@firstcluster.vvj7bt0.mongodb.net/?retryWrites=true&w=majority")
+    .connect("")
     .then(()=>{console.log("Connected to mongodb")})
     .catch((error)=>console.log("Couldn't connect to mongodb slime", error));
 
-const fruitSchema = new mongoose.Schema({
-    name: String,
-    color: String,
-    taste: String,
-    size: String,
-    origin: String,
-    img: String,
-    facts: [String],
+const jewelSchema = new mongoose.Schema({
+    material:String,
+    size:String, 
+    gem:String,
 });
 
-const Fruit = mongoose.model("Fruit", fruitSchema);
+const Jewel = mongoose.model("Jewel", jewelSchema);
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html"); 
+    res.sendFile(__dirname + "/images"); 
 });
 
-app.get("/api/fruits", (req, res) => {
-    getFruits(res);
+app.get("/api/jewels", (req, res) => {
+    getJewels(res);
 });
 
-const getFruits = async (res) => {
-    const fruits = await Fruit.find();
-    res.send(fruits);
+const getJewels = async (res) => {
+    const jewels = await Jewel.find();
+    res.send(jewels);
 };
 
-app.post("/api/fruits", upload.single("img"), (req, res) => {
-    const result = validateFruit(req.body);
+app.post("/api/jewels", upload.single("img"), (req, res) => {
+    const result = validateJewel(req.body);
     
     if (result.error) {
         res.status(400).send(result.error.details[0].message);
         return;
     }
 
-    const fruit = new Fruit({
-        name:req.body.name,
-        color:req.body.color,
-        taste:req.body.taste,
+    const jewel = new Jewel({
+        material:req.body.material,
         size:req.body.size,
-        origin:req.body.origin,
-        facts:req.body.facts.split(",")
+        gem:req.body.gem
     });
 
     if (req.file) {
-        fruit.img = "images/" + req.file.filename;
+        jewel.img = "images/" + req.file.filename;
     }
 
-    createFruit(fruit, res);
+    createJewel(jewel, res);
 });
 
-const createFruit = async (fruit, res) => {
-    const result = await fruit.save();
-    res.send(fruit);
+const createJewel = async (jewel, res) => {
+    const result = await jewel.save();
+    res.send(jewel);
 }
 
-app.delete("/api/fruits/:id", upload.single("img"), (req, res) => {
-    removeFruits(res, req.params.id);
+app.delete("/api/jewels/:id", upload.single("img"), (req, res) => {
+    removeJewels(res, req.params.id);
 });
 
-const removeFruits = async(res, id) => {
-    const fruit = await Fruit.findByIdAndDelete(id);
-    res.send(fruit);
+const removeJewels = async(res, id) => {
+    const jewel = await Jewel.findByIdAndDelete(id);
+    res.send(jewel);
 }
 
-app.put("/api/fruits/:id", upload.single("img"), (req, res) => {
-    const result = validateFruit(req.body);
+app.put("/api/jewels/:id", upload.single("img"), (req, res) => {
+    const result = validateJewel(req.body);
     
     if (result.error) {
         res.status(400).send(result.error.details[0].message);
         return;
     }
-    updateFruit(req, res);
+    updateJewel(req, res);
 });
 
-const updateFruit = async (req, res) => {
+const updateJewel = async (req, res) => {
     let fieldsToUpdate = {
-        name:req.body.name,
-        color:req.body.color,
-        taste:req.body.taste,
+        material:req.body.material,
         size:req.body.size,
-        origin:req.body.origin,
-        facts:req.body.facts.split(",")
+        gem:req.body.gem
     }
 
     if(req.file) {
         fieldsToUpdate.img - "images/" + req.file.filename;
     }
 
-    const result = await Fruit.updateOne({_id:req.params.id}, fieldsToUpdate);
-    const fruit = await Fruit.findById(req.params.id);
-    res.send(fruit);
+    const result = await Jewel.updateOne({_id:req.params.id}, fieldsToUpdate);
+    const jewel = await Jewel.findById(req.params.id);
+    res.send(jewel);
 };
 
-const validateFruit = (fruit) => {
+const validateJewel = (jewel) => {
     const schema = Joi.object({
         _id: Joi.allow(""),
-        facts: Joi.allow(""),
-        name: Joi.string().min(3).required(),
-        color: Joi.string().min(3).required(),
-        taste: Joi.string().min(3).required(),
+        material: Joi.string().min(3).required(),
         size: Joi.string().min(3).required(),
-        origin: Joi.string().min(3).required()
+        gem: Joi.string().min(3).required()
     });
 
-    return schema.validate(fruit);
+    return schema.validate(jewel);
 };
 
 app.listen(3000, () => {

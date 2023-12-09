@@ -1,77 +1,119 @@
-body {
-    font-family: 'Times New Roman', Times, serif;
+/* Main Navigation */
+#main-nav {
     background-color: lightgray;
 }
+#main-nav ul {
+    padding-left: 0px;
+}
+#nav-items {
+    text-align: center;
+    padding: 10px;
+}
+#main-nav li {
+    list-style-type: none;
+    padding: 5px;
+}
+#main-nav a {
+    text-decoration: none;
+    color: black;
+}
+#main-nav li:hover {
+    background-color: lightgrey;
+}
+#main-footer {
+    background-color: rgb(198, 198, 202);
+    padding: 5px;
+    text-align: center;
+}
+#main-content {
+    padding: 5px;
+    min-height: 100vh;
+    width: 100%;
+}
 
+/*Typography*/
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: ivory;
+}
 h1 {
     text-align: center;
 }
-
-.fruit {
-    padding: 20px;
-    margin: 20px;
-    background: lightslategray;
-    border-radius: 10px;
+h2 {
+    border-bottom: 1px solid rgb(54, 54, 54);;
+}
+a {
+    text-decoration: none;
+    color: black;
 }
 
-.fruit img {
+/*Other*/
+#hamburger div {
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
+}
+#hamburger {
+    padding:5px;
+}
+.hide-small {
+    display: none;
+}
+.hidden {
+    display: none;
+}
+label {
+    display: block;
+}
+.inline {
+    display: inline;
+}
+.hide {
+    opacity: 0;
+}
+
+/*Jewel*/
+.jewel {
+    padding: 20px;
+    margin: 20px;
+    background: lightgray;
+    border-radius: 10px;
+}
+.jewel img {
     max-width: 90%;
     display: block;
     margin: auto;
     opacity: 0.8;
     border: 3px outset rgb(85, 97, 109);
 }
-
-#fruit-information-column {
-    padding: 20px;
-    margin: 20px;
-    font-size:x-large;
-    background: lightslategray;
+#jewel-information-column {
+    padding: 10px;
+    margin: 10px;
+    font-size:large;
+    background: lightgray;
     border-radius: 10px;
 }
-
 #addl {
     font-size: 1em;
     margin-left: 48.6%;
     border: 1px solid black;
-    background-color: lightslategray;
+    background-color: lightgray;
     padding: 3px;
 }
-
 #editl {
     float: right;
     margin-right: 10px;
 }
-
 #deletel {
     float: right;
 }
-
-#ae-fruit-container {
+#ae-jewel-container {
     padding: 20px;
     margin: 20px;
-    background: lightslategray;
+    background: lightgray;
     border-radius: 10px;
 }
-
-label {
-    display: block;
-}
-
-.inline {
-    display: inline;
-}
-
-#facts-p input {
-    margin-top: 5px;
-}
-
-#addf {
-    color: purple;
-    font-size: 1em;
-    text-align: right;
-}
-
 .box-text {
     background-color: #fefefe;
     margin: auto;
@@ -79,14 +121,12 @@ label {
     border: 1px solid #888;
     width: 100%;
 }
-
 .box-text img {
     max-width: fit-content;
     display: block;
     padding: 30px 5px 30px 30px;
     margin: auto;
 }
-
 .close {
     color: #aaaaaa;
     float: right;
@@ -94,32 +134,54 @@ label {
     font-weight: bold;
     padding: 0px 5px;
 }
-
 .close:hover,
 .close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
-
-#main-nav-items {
-    font-size: 2em;
-}
-
-a {
-    text-decoration: none;
+button {
+    margin-top: 20px;
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.116);
+    background-color: lightgray;
     color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
 }
-
-.hidden {
-    display: none;
+button:hover {
+    background-color: rgb(53, 53, 53);
+    color: white;
 }
-
-.hide {
-    opacity: 0;
+#interactive-li {
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 @media (min-width: 600px) {
+    #main-nav ul {
+        display: flex;
+    }
+    #main-nav li {
+        background: none;
+        border: none;
+    }
+    #main-nav li:hover {
+        background: none;
+    }
+    #nav-items {
+        align-content: center;
+        justify-content: space-evenly;
+    }
+    #hamburger {
+        display: none;
+    }
+    .hide-small {
+        display: block;
+    }
     .columns {
         display: flex;
         flex-wrap: wrap;
@@ -127,10 +189,10 @@ a {
     .two-columns div {
         flex: 1;
     }
-    .fruit {
+    .jewel {
         width: 40%;
     }
-    #ae-fruit-container {
+    #ae-jewel-container {
         max-width: 20%;
         margin: auto;
     }
